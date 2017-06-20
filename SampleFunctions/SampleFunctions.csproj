@@ -139,6 +139,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\IoTHubExtension\IoTHubExtension.csproj">
+      <Project>{F1819F5A-C102-4CA1-B5E8-E28F513449F7}</Project>
+      <Name>IoTHubExtension</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Sample2Extension\Sample2Extension.csproj">
       <Project>{8aaf014a-b562-4fe5-83c1-df0f4f052062}</Project>
       <Name>Sample2Extension</Name>

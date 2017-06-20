@@ -23,6 +23,7 @@ namespace SampleExtension.Config
         public SampleAsyncCollector(string root)
         {
             _root = root;
+
         }
 
         public Task AddAsync(SampleItem item, CancellationToken cancellationToken = default(CancellationToken))
