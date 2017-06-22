@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Azure.Devices;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Host.Config;
+using Newtonsoft.Json;
 
 namespace IoTHubExtension.Config
 {
@@ -26,19 +27,21 @@ namespace IoTHubExtension.Config
             //rule.BindToInput<SampleItem>(BuildItemFromAttr);
             rule.BindToCollector<IoTCloudToDeviceItem>(BuildCollector);
         }
-
+        
         private string ConvertToString(IoTCloudToDeviceItem item)
         {
-            return item.Message;
+            return JsonConvert.SerializeObject(item);
         }
 
-        private IoTCloudToDeviceItem ConvertToItem(string arg)
+        private IoTCloudToDeviceItem ConvertToItem(string str)
         {
-            var parts = arg.Split(':');
+            var item = JsonConvert.DeserializeObject<Dictionary<string, string>>(str);
+
             return new IoTCloudToDeviceItem
             {
-                DeviceId = parts[0],
-                Message = parts[1]
+                DeviceId = item["DeviceId"],
+                MessageId = item["MessageId"],
+                Message = str
             };
         }
 

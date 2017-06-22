@@ -21,9 +21,7 @@ namespace IoTHubExtension.Config
         public IoTCloudToDeviceAsyncCollector(IoTCloudToDeviceAttribute attribute)
         {
             // create client;
-            serviceClient = ServiceClient.CreateFromConnectionString(attribute.ConnectionString);
-
-            //SendCloudToDeviceMessageAsync(msg).Wait();  // should I be calling this?
+            serviceClient = ServiceClient.CreateFromConnectionString(attribute.ConnectionString);            
         }
         public Task AddAsync(IoTCloudToDeviceItem item, CancellationToken cancellationToken = default(CancellationToken))
         {

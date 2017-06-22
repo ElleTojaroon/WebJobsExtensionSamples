@@ -11,15 +11,15 @@ namespace SimulatedDevice
     class Program
     {
         static DeviceClient deviceClient;
-        static string iotHubUri = "t-patoja-hello-iot.azure-devices.net";
-        static string deviceKey = "5TG4g2eXkjr+EhFf0e7HSEYTDfmDhgZrjIeaLYe8I4E=";
+        static string iotHubUri = "IotHubC2D.azure-devices.net";// "t-patoja-hello-iot.azure-devices.net";
+        static string deviceKey = "JI50XEJNyExM+hvFvQG5oA2KEHxJa9suA83GycTV7As="; //"5TG4g2eXkjr+EhFf0e7HSEYTDfmDhgZrjIeaLYe8I4E=";
 
         static void Main(string[] args)
         {
             Console.WriteLine("Simulated device\n");
             deviceClient = DeviceClient.Create(iotHubUri, new DeviceAuthenticationWithRegistrySymmetricKey("myFirstDevice", deviceKey), TransportType.Mqtt);
 
-            //SendDeviceToCloudMessagesAsync();
+            SendDeviceToCloudMessagesAsync();
 
             ReceiveC2dAsync();
 
@@ -56,17 +56,19 @@ namespace SimulatedDevice
 
                 var telemetryDataPoint = new
                 {
-                    messageId = messageId++,
-                    deviceId = "myFirstDevice",
-                    temperature = currentTemperature,
-                    humidity = currentHumidity
+                    MessageId = messageId++,
+                    DeviceId = "myFirstDevice",
+                    Temperature = currentTemperature,
+                    Humidity = currentHumidity
                 };
                 var messageString = JsonConvert.SerializeObject(telemetryDataPoint);
                 var message = new Message(Encoding.ASCII.GetBytes(messageString));
                 message.Properties.Add("temperatureAlert", (currentTemperature > 30) ? "true" : "false");
 
                 await deviceClient.SendEventAsync(message);
+                Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine("{0} > Sending message: {1}", DateTime.Now, messageString);
+                Console.ResetColor();
 
                 await Task.Delay(1000);
             }

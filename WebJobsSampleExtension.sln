@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IoTHubExtension", "IoTHubEx
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimulatedDevice", "SimulatedDevice\SimulatedDevice.csproj", "{32BF1328-B758-4A7F-BCC2-699398036549}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReadD2C", "ReadD2C\ReadD2C.csproj", "{1AF56511-0A04-44AD-B258-43AA7BE93C77}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{32BF1328-B758-4A7F-BCC2-699398036549}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{32BF1328-B758-4A7F-BCC2-699398036549}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{32BF1328-B758-4A7F-BCC2-699398036549}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1AF56511-0A04-44AD-B258-43AA7BE93C77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AF56511-0A04-44AD-B258-43AA7BE93C77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AF56511-0A04-44AD-B258-43AA7BE93C77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AF56511-0A04-44AD-B258-43AA7BE93C77}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
