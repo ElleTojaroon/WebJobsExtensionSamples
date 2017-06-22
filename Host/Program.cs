@@ -16,8 +16,11 @@ namespace Host
             config.DashboardConnectionString = null;
 
             // apply config before creating the host.
-            var clouldToDeviceExtension = new IoTHubExtension.Config.IoTCloudToDeviceExtension();
-            config.AddExtension(clouldToDeviceExtension);            
+            var cloudToDeviceExtension = new IoTHubExtension.Config.IoTCloudToDeviceExtension();
+            config.AddExtension(cloudToDeviceExtension);
+
+            var directMethodExtension = new IoTDirectMethodExtension.Config.IoTDirectMethodExtension();
+            config.AddExtension(directMethodExtension);
 
             // Debug diagnostics!
             config.CreateMetadataProvider().DebugDumpGraph(Console.Out);
@@ -27,7 +30,11 @@ namespace Host
             // Test some invocations. 
             var method = typeof(Functions).GetMethod("WriteMessageFromC2D");
             host.Call(method);
-            
+
+            // Test some invocations. 
+            method = typeof(Functions).GetMethod("DirectInvokeMethod");
+            host.Call(method);
+
             // host.RunAndBlock();
         }
     }

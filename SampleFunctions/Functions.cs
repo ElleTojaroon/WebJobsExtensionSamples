@@ -4,6 +4,7 @@ using SampleExtension;
 using IoTHubExtension;
 using System.IO;
 using Newtonsoft.Json;
+using IoTDirectMethodExtension;
 
 namespace SampleFunctions
 {
@@ -34,6 +35,35 @@ namespace SampleFunctions
                 DeviceId = "myFirstDevice",
                 MessageId = "3",
                 Message = "Cloud"
+            };
+            output.Add(JsonConvert.SerializeObject(item));
+        }
+
+        // Write some messages
+        [NoAutomaticTrigger]
+        public void DirectInvokeMethod([IoTDirectMethodDevice] ICollector<string> output)
+        {
+            var item = new
+            {
+                DeviceId = "myFirstDevice",
+                InvokeId = "1",
+                MethodName = "onWriteLine"
+            };
+            output.Add(JsonConvert.SerializeObject(item));
+
+            item = new
+            {
+                DeviceId = "myFirstDevice",
+                InvokeId = "2",
+                MethodName = "onWriteLine"
+            };
+            output.Add(JsonConvert.SerializeObject(item));
+
+            item = new
+            {
+                DeviceId = "myFirstDevice",
+                InvokeId = "3",
+                MethodName = "onWriteLine"
             };
             output.Add(JsonConvert.SerializeObject(item));
         }
