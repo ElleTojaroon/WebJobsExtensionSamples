@@ -15,9 +15,6 @@ copy SampleExtension.dll Extensions\SampleExtension.dll</PostBuildEvent>
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="1.0.0-alpha5" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SampleExtension\SampleExtension.csproj" />
-  </ItemGroup>
-  <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>

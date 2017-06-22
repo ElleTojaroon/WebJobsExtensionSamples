@@ -5,21 +5,13 @@ VisualStudioVersion = 15.0.26430.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Host", "Host\Host.csproj", "{CF992C26-5A64-4FED-8295-FB2CC4FE5547}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleExtension", "SampleExtension\SampleExtension.csproj", "{EDDD5DD2-B022-4BAA-8088-B8E14AA899FC}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleFunctions", "SampleFunctions\SampleFunctions.csproj", "{0F9768C5-72CB-4CD8-9627-A055AB6E7274}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample2Extension", "Sample2Extension\Sample2Extension.csproj", "{8AAF014A-B562-4FE5-83C1-DF0F4F052062}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FunctionApp", "FunctionApp\FunctionApp.csproj", "{A84D6EB5-2A20-44CD-A468-3BB446F44B4E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IoTHubExtension", "IoTHubExtension\IoTHubExtension.csproj", "{F1819F5A-C102-4CA1-B5E8-E28F513449F7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimulatedDevice", "SimulatedDevice\SimulatedDevice.csproj", "{32BF1328-B758-4A7F-BCC2-699398036549}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReadD2C", "ReadD2C\ReadD2C.csproj", "{1AF56511-0A04-44AD-B258-43AA7BE93C77}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IoTDirectMethodExtension", "IoTDirectMethodExtension\IoTDirectMethodExtension.csproj", "{A5648135-C2C0-4131-B40B-F0AB6CD4B4BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,22 +23,10 @@ Global
 		{CF992C26-5A64-4FED-8295-FB2CC4FE5547}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF992C26-5A64-4FED-8295-FB2CC4FE5547}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF992C26-5A64-4FED-8295-FB2CC4FE5547}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EDDD5DD2-B022-4BAA-8088-B8E14AA899FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EDDD5DD2-B022-4BAA-8088-B8E14AA899FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EDDD5DD2-B022-4BAA-8088-B8E14AA899FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EDDD5DD2-B022-4BAA-8088-B8E14AA899FC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0F9768C5-72CB-4CD8-9627-A055AB6E7274}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0F9768C5-72CB-4CD8-9627-A055AB6E7274}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F9768C5-72CB-4CD8-9627-A055AB6E7274}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F9768C5-72CB-4CD8-9627-A055AB6E7274}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8AAF014A-B562-4FE5-83C1-DF0F4F052062}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8AAF014A-B562-4FE5-83C1-DF0F4F052062}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8AAF014A-B562-4FE5-83C1-DF0F4F052062}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8AAF014A-B562-4FE5-83C1-DF0F4F052062}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A84D6EB5-2A20-44CD-A468-3BB446F44B4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A84D6EB5-2A20-44CD-A468-3BB446F44B4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A84D6EB5-2A20-44CD-A468-3BB446F44B4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A84D6EB5-2A20-44CD-A468-3BB446F44B4E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F1819F5A-C102-4CA1-B5E8-E28F513449F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F1819F5A-C102-4CA1-B5E8-E28F513449F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F1819F5A-C102-4CA1-B5E8-E28F513449F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -59,10 +39,6 @@ Global
 		{1AF56511-0A04-44AD-B258-43AA7BE93C77}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1AF56511-0A04-44AD-B258-43AA7BE93C77}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1AF56511-0A04-44AD-B258-43AA7BE93C77}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A5648135-C2C0-4131-B40B-F0AB6CD4B4BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A5648135-C2C0-4131-B40B-F0AB6CD4B4BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A5648135-C2C0-4131-B40B-F0AB6CD4B4BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A5648135-C2C0-4131-B40B-F0AB6CD4B4BD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,10 +1,8 @@
 ﻿using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Host;
-using SampleExtension;
 using IoTHubExtension;
 using System.IO;
 using Newtonsoft.Json;
-using IoTDirectMethodExtension;
 
 namespace SampleFunctions
 {
@@ -41,7 +39,7 @@ namespace SampleFunctions
 
         // Write some messages
         [NoAutomaticTrigger]
-        public void DirectInvokeMethod([IoTDirectMethodDevice] ICollector<string> output)
+        public void DirectInvokeMethod([IoTDirectMethod] ICollector<string> output)
         {
             var item = new
             {

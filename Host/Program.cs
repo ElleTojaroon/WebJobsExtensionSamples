@@ -19,7 +19,7 @@ namespace Host
             var cloudToDeviceExtension = new IoTHubExtension.Config.IoTCloudToDeviceExtension();
             config.AddExtension(cloudToDeviceExtension);
 
-            var directMethodExtension = new IoTDirectMethodExtension.Config.IoTDirectMethodExtension();
+            var directMethodExtension = new IoTHubExtension.Config.IoTDirectMethodExtension();
             config.AddExtension(directMethodExtension);
 
             // Debug diagnostics!
