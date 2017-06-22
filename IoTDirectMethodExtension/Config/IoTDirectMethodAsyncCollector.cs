@@ -16,6 +16,7 @@ namespace IoTDirectMethodExtension.Config
             // create client;
             serviceClient = ServiceClient.CreateFromConnectionString(attribute.ConnectionString);
         }
+
         public Task AddAsync(IoTDirectMessageDeviceItem item, CancellationToken cancellationToken = default(CancellationToken))
         {
             InvokeMethod(item.DeviceId, item.MethodName).Wait();
@@ -25,13 +26,6 @@ namespace IoTDirectMethodExtension.Config
         public Task FlushAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
             return Task.CompletedTask;
-        }
-
-        private async static Task SendCloudToDeviceMessageAsync(IoTDirectMessageDeviceItem item)
-        {
-            char[] messageCharArr = item.MethodName.ToCharArray();
-            var deviceToCloudMessage = new Message(Encoding.ASCII.GetBytes(messageCharArr));
-            await serviceClient.SendAsync(item.DeviceId, deviceToCloudMessage);
         }
 
         private static async Task InvokeMethod(string deviceID, string method)

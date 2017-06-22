@@ -47,7 +47,7 @@ namespace SampleFunctions
             {
                 DeviceId = "myFirstDevice",
                 InvokeId = "1",
-                MethodName = "onWriteLine"
+                MethodName = "writeLine"
             };
             output.Add(JsonConvert.SerializeObject(item));
 
@@ -55,7 +55,7 @@ namespace SampleFunctions
             {
                 DeviceId = "myFirstDevice",
                 InvokeId = "2",
-                MethodName = "onWriteLine"
+                MethodName = "writeLine"
             };
             output.Add(JsonConvert.SerializeObject(item));
 
@@ -63,7 +63,7 @@ namespace SampleFunctions
             {
                 DeviceId = "myFirstDevice",
                 InvokeId = "3",
-                MethodName = "onWriteLine"
+                MethodName = "writeLine"
             };
             output.Add(JsonConvert.SerializeObject(item));
         }
