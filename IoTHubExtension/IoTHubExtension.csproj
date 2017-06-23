@@ -173,10 +173,14 @@
     <Compile Include="Config\IoTCloudToDeviceExtension.cs" />
     <Compile Include="Config\IoTDirectMethodAsyncCollector.cs" />
     <Compile Include="Config\IoTDirectMethodExtension.cs" />
+    <Compile Include="Config\IoTSetDeviceTwinAsyncCollector.cs" />
+    <Compile Include="Config\IoTSetDeviceTwinExtension.cs" />
     <Compile Include="IoTCloudToDeviceAttribute.cs" />
     <Compile Include="IoTCloudToDeviceItem.cs" />
     <Compile Include="IoTDirectMethodAttribute.cs" />
     <Compile Include="IoTDirectMethodItem.cs" />
+    <Compile Include="IoTSetDeviceTwinAttribute.cs" />
+    <Compile Include="IoTSetDeviceTwinItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

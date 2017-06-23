@@ -22,17 +22,24 @@ namespace Host
             var directMethodExtension = new IoTHubExtension.Config.IoTDirectMethodExtension();
             config.AddExtension(directMethodExtension);
 
+            var setDeviceTwinExtension = new IoTHubExtension.Config.IoTSetDeviceTwinExtension();
+            config.AddExtension(setDeviceTwinExtension);
+
             // Debug diagnostics!
             config.CreateMetadataProvider().DebugDumpGraph(Console.Out);
 
             var host = new JobHost(config);
 
             // Test some invocations. 
-            var method = typeof(Functions).GetMethod("WriteMessageFromC2D");
-            host.Call(method);
+            //var method = typeof(Functions).GetMethod("WriteMessageFromC2D");
+            //host.Call(method);
+
+            //// Test some invocations. 
+            //method = typeof(Functions).GetMethod("DirectInvokeMethod");
+            //host.Call(method);
 
             // Test some invocations. 
-            method = typeof(Functions).GetMethod("DirectInvokeMethod");
+            var method = typeof(Functions).GetMethod("SetDeviceTwin");
             host.Call(method);
 
             // host.RunAndBlock();
