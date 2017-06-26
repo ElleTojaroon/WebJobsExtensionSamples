@@ -30,17 +30,17 @@ namespace Host
 
             var host = new JobHost(config);
 
-            // Test some invocations. 
+            //Test some invocations.
             //var method = typeof(Functions).GetMethod("WriteMessageFromC2D");
             //host.Call(method);
 
-            //// Test some invocations. 
-            //method = typeof(Functions).GetMethod("DirectInvokeMethod");
-            //host.Call(method);
-
             // Test some invocations. 
-            var method = typeof(Functions).GetMethod("SetDeviceTwin");
+            var method = typeof(Functions).GetMethod("DirectInvokeMethod");
             host.Call(method);
+
+            ////// Test some invocations. 
+            //var method = typeof(Functions).GetMethod("SetDeviceTwin");
+            //host.Call(method);
 
             // host.RunAndBlock();
         }

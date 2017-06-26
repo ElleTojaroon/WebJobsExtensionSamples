@@ -23,7 +23,7 @@ namespace IoTHubExtension.Config
             // Create 2 binding rules for the Sample attribute.
             var rule = context.AddBindingRule<IoTSetDeviceTwinAttribute>();
 
-            //rule.BindToInput<SampleItem>(BuildItemFromAttr);
+            //rule.BindToInput<IoTSetDeviceTwinItem>(BuildItemFromAttr);
             rule.BindToCollector<IoTSetDeviceTwinItem>(BuildCollector);
         }
 
@@ -48,5 +48,16 @@ namespace IoTHubExtension.Config
         {
             return new IoTSetDeviceTwinAsyncCollector(attribute);
         }
+
+        // All {} and %% in the Attribute have been resolved by now. 
+        //private IoTSetDeviceTwinItem BuildItemFromAttr(IoTSetDeviceTwinAttribute attribute)
+        //{
+        //    return new IoTSetDeviceTwinItem
+        //    {
+        //        DeviceId = attribute.DeviceId,
+        //        UpdateId = attribute.UpdateId,
+        //        Patch = attribute.Patch
+        //    };
+        //}
     }
 }

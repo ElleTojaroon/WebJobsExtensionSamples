@@ -58,6 +58,7 @@ namespace SimulatedDevice
                 {
                     MessageId = messageId++,
                     DeviceId = "myFirstDevice",
+                    TimeStamp = DateTime.Now,
                     Temperature = currentTemperature,
                     Humidity = currentHumidity
                 };
