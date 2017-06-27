@@ -11,13 +11,13 @@ namespace SimulatedDevice
     class Program
     {
         static DeviceClient deviceClient;
-        static string iotHubUri = "IotHubC2D.azure-devices.net";// "t-patoja-hello-iot.azure-devices.net";
-        static string deviceKey = "JI50XEJNyExM+hvFvQG5oA2KEHxJa9suA83GycTV7As="; //"5TG4g2eXkjr+EhFf0e7HSEYTDfmDhgZrjIeaLYe8I4E=";
+        static string iotHubUri = "IotHubC2D.azure-devices.net";
+        static string deviceKey = "Vi+e5SqkjxVVKmDJVnFhmBhoQS0V0Rg8aeSsVCAV4vE=";
 
         static void Main(string[] args)
         {
             Console.WriteLine("Simulated device\n");
-            deviceClient = DeviceClient.Create(iotHubUri, new DeviceAuthenticationWithRegistrySymmetricKey("myFirstDevice", deviceKey), TransportType.Mqtt);
+            deviceClient = DeviceClient.Create(iotHubUri, new DeviceAuthenticationWithRegistrySymmetricKey("mySecondDevice", deviceKey), TransportType.Mqtt);
 
             SendDeviceToCloudMessagesAsync();
 
@@ -26,6 +26,7 @@ namespace SimulatedDevice
             Console.ReadLine();
         }
 
+        // when device receives data from cloud
         private static async void ReceiveC2dAsync()
         {
             Console.WriteLine("\nReceiving cloud to device messages from service");
@@ -54,6 +55,7 @@ namespace SimulatedDevice
                 double currentTemperature = minTemperature + rand.NextDouble() * 15;
                 double currentHumidity = minHumidity + rand.NextDouble() * 20;
 
+                // input data from device
                 var telemetryDataPoint = new
                 {
                     MessageId = messageId++,
@@ -71,7 +73,7 @@ namespace SimulatedDevice
                 Console.WriteLine("{0} > Sending message: {1}", DateTime.Now, messageString);
                 Console.ResetColor();
 
-                await Task.Delay(1000);
+                await Task.Delay(5000);
             }
         }
     }

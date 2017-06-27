@@ -28,10 +28,10 @@ namespace IoTHubExtension.Config
             return Task.CompletedTask;
         }
 
-        private static async Task InvokeMethod(string deviceID, string method)
+        private static async Task InvokeMethod(string deviceID, string methodName)
         {
-            var methodInvocation = new CloudToDeviceMethod(method) { ResponseTimeout = TimeSpan.FromSeconds(30) };
-            methodInvocation.SetPayloadJson("'Hello From Cloud'");
+            var methodInvocation = new CloudToDeviceMethod(methodName) { ResponseTimeout = TimeSpan.FromSeconds(30) };
+            //methodInvocation.SetPayloadJson("'Hello From Cloud'");
 
             var response = await serviceClient.InvokeDeviceMethodAsync(deviceID, methodInvocation);
 

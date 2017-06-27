@@ -35,8 +35,8 @@ namespace Host
             //host.Call(method);
 
             // Test some invocations. 
-            var method = typeof(Functions).GetMethod("DirectInvokeMethod");
-            host.Call(method);
+            //var method = typeof(Functions).GetMethod("DirectInvokeMethod");
+            //host.Call(method);
 
             ////// Test some invocations. 
             //var method = typeof(Functions).GetMethod("SetDeviceTwin");
