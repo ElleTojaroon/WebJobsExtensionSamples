@@ -26,7 +26,7 @@ var connectCallback = function (err) {
         var fontColor;
         var receiverDeviceId;
 
-        if (count%3 == 0) {
+        if (count%5 == 0) {
             isDirectMethod = true;
             messageString = 'writeLine';
             receiverDeviceId = 'receiverAlice';

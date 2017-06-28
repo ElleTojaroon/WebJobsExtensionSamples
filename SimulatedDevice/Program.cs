@@ -74,6 +74,8 @@ namespace SimulatedDevice
                 Console.ResetColor();
 
                 await Task.Delay(5000);
+
+
             }
         }
     }

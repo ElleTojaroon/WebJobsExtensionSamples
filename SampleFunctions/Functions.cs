@@ -74,7 +74,7 @@ namespace SampleFunctions
 
             var item2 = new
             {
-                DeviceId = "myFirstDevice",
+                DeviceId = "receiverAlice",
                 UpdateId = "2",
                 Patch = new
                 {
@@ -94,7 +94,7 @@ namespace SampleFunctions
 
             var item = new
             {
-                DeviceId = "myFirstDevice",
+                DeviceId = "receiverAlice",
                 UpdateId = "1",
                 Patch = new
                 {
@@ -112,7 +112,7 @@ namespace SampleFunctions
 
             var item3 = new
             {
-                DeviceId = "myFirstDevice",
+                DeviceId = "receiverAlice",
                 UpdateId = "3",
                 Patch = new
                 {

@@ -48,5 +48,6 @@ namespace IoTHubExtension.Config
         {
             return new IoTDirectMethodAsyncCollector(attribute);
         }
+
     }
 }

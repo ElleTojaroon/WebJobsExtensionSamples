@@ -39,8 +39,8 @@ namespace Host
             //host.Call(method);
 
             ////// Test some invocations. 
-            //var method = typeof(Functions).GetMethod("SetDeviceTwin");
-            //host.Call(method);
+            var method = typeof(Functions).GetMethod("SetDeviceTwin");
+            host.Call(method);
 
             // host.RunAndBlock();
         }
