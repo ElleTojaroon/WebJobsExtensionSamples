@@ -25,22 +25,30 @@ namespace Host
             var setDeviceTwinExtension = new IoTHubExtension.Config.IoTSetDeviceTwinExtension();
             config.AddExtension(setDeviceTwinExtension);
 
+            var getDeviceTwinExtension = new IoTHubExtension.Config.IoTGetDeviceTwinExtension();
+            config.AddExtension(getDeviceTwinExtension);
+
             // Debug diagnostics!
             config.CreateMetadataProvider().DebugDumpGraph(Console.Out);
 
             var host = new JobHost(config);
 
             //Test some invocations.
-            //var method = typeof(Functions).GetMethod("WriteMessageFromC2D");
-            //host.Call(method);
+            var method = typeof(Functions).GetMethod("WriteMessageFromC2D");
+            host.Call(method);
 
             // Test some invocations. 
             //var method = typeof(Functions).GetMethod("DirectInvokeMethod");
             //host.Call(method);
 
             ////// Test some invocations. 
-            var method = typeof(Functions).GetMethod("SetDeviceTwin");
-            host.Call(method);
+            //var method = typeof(Functions).GetMethod("SetDeviceTwin");
+            //host.Call(method);
+
+
+            ////// Test some invocations. 
+            //var method = typeof(Functions).GetMethod("GetDeviceTwinTwinObject");
+            //host.Call(method, new { deviceId = "receiverCarol", messageId = "123" });
 
             // host.RunAndBlock();
         }

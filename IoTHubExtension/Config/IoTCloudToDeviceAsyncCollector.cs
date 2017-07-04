@@ -18,10 +18,10 @@ namespace IoTHubExtension.Config
     {
         private static ServiceClient serviceClient;
 
-        public IoTCloudToDeviceAsyncCollector(IoTCloudToDeviceAttribute attribute)
+        public IoTCloudToDeviceAsyncCollector(ServiceClient serviceClient, IoTCloudToDeviceAttribute attribute)
         {
-            // create client;
-            serviceClient = ServiceClient.CreateFromConnectionString(attribute.ConnectionString);            
+            // create client;    
+            IoTCloudToDeviceAsyncCollector.serviceClient = serviceClient;
         }
         public Task AddAsync(IoTCloudToDeviceItem item, CancellationToken cancellationToken = default(CancellationToken))
         {

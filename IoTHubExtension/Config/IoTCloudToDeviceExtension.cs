@@ -12,8 +12,14 @@ namespace IoTHubExtension.Config
 {
     public class IoTCloudToDeviceExtension : IExtensionConfigProvider
     {
+        private static string connectionString;
+        private static ServiceClient serviceClient;
+
         public void Initialize(ExtensionConfigContext context)
         {
+            connectionString = Environment.GetEnvironmentVariable("IoTConnectionString");
+            serviceClient = ServiceClient.CreateFromConnectionString(connectionString);
+
             // This allows a user to bind to IAsyncCollector<string>, and the sdk
             // will convert that to IAsyncCollector<IoTCloudToDeviceItem>
             context.AddConverter<string, IoTCloudToDeviceItem>(ConvertToItem);
@@ -47,7 +53,7 @@ namespace IoTHubExtension.Config
 
         private IAsyncCollector<IoTCloudToDeviceItem> BuildCollector(IoTCloudToDeviceAttribute attribute)
         {
-            return new IoTCloudToDeviceAsyncCollector(attribute);
+            return new IoTCloudToDeviceAsyncCollector(serviceClient, attribute);
         }
     }
 }

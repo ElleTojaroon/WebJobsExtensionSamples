@@ -12,10 +12,11 @@ namespace IoTHubExtension.Config
     {
         static RegistryManager registryManager;
         
-        public IoTSetDeviceTwinAsyncCollector(IoTSetDeviceTwinAttribute attribute)
+        public IoTSetDeviceTwinAsyncCollector(RegistryManager registryManager, IoTSetDeviceTwinAttribute attribute)
         {
             // create client;
-            registryManager = RegistryManager.CreateFromConnectionString(attribute.ConnectionString);            
+            //IoTSetDeviceTwinAsyncCollector.registryManager = RegistryManager.CreateFromConnectionString(attribute.ConnectionString);            
+            IoTSetDeviceTwinAsyncCollector.registryManager = registryManager;
         }
 
         public Task AddAsync(IoTSetDeviceTwinItem item, CancellationToken cancellationToken = default(CancellationToken))

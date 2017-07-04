@@ -11,10 +11,11 @@ namespace IoTHubExtension.Config
     {
         private static ServiceClient serviceClient;
 
-        public IoTDirectMethodAsyncCollector(IoTDirectMethodAttribute attribute)
+        public IoTDirectMethodAsyncCollector(ServiceClient serviceClient, IoTDirectMethodAttribute attribute)
         {
             // create client;
-            serviceClient = ServiceClient.CreateFromConnectionString(attribute.ConnectionString);
+            //serviceClient = ServiceClient.CreateFromConnectionString(attribute.ConnectionString);
+            IoTDirectMethodAsyncCollector.serviceClient = serviceClient;
         }
 
         public Task AddAsync(IoTDirectMethodItem item, CancellationToken cancellationToken = default(CancellationToken))

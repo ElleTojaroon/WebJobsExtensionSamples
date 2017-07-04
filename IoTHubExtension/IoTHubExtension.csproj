@@ -92,6 +92,10 @@
       <HintPath>..\packages\System.AppContext.4.3.0\lib\net46\System.AppContext.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Abstractions, Version=2.0.2.26, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Configuration.Abstractions.2.0.2.26\lib\net45\System.Configuration.Abstractions.dll</HintPath>
+    </Reference>
     <Reference Include="System.Console, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Console.4.3.0\lib\net46\System.Console.dll</HintPath>
     </Reference>
@@ -173,12 +177,15 @@
     <Compile Include="Config\IoTCloudToDeviceExtension.cs" />
     <Compile Include="Config\IoTDirectMethodAsyncCollector.cs" />
     <Compile Include="Config\IoTDirectMethodExtension.cs" />
+    <Compile Include="Config\IoTGetDeviceTwinExtension.cs" />
     <Compile Include="Config\IoTSetDeviceTwinAsyncCollector.cs" />
     <Compile Include="Config\IoTSetDeviceTwinExtension.cs" />
     <Compile Include="IoTCloudToDeviceAttribute.cs" />
     <Compile Include="IoTCloudToDeviceItem.cs" />
     <Compile Include="IoTDirectMethodAttribute.cs" />
     <Compile Include="IoTDirectMethodItem.cs" />
+    <Compile Include="IoTGetDeviceTwinAttribute.cs" />
+    <Compile Include="IoTGetDeviceTwinItem.cs" />
     <Compile Include="IoTSetDeviceTwinAttribute.cs" />
     <Compile Include="IoTSetDeviceTwinItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

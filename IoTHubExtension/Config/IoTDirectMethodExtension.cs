@@ -1,4 +1,5 @@
-﻿using Microsoft.Azure.WebJobs;
+﻿using Microsoft.Azure.Devices;
+using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Host.Config;
 using Newtonsoft.Json;
 using System;
@@ -11,8 +12,14 @@ namespace IoTHubExtension.Config
 {
     public class IoTDirectMethodExtension : IExtensionConfigProvider
     {
+        private static string connectionString;
+        private static ServiceClient serviceClient;
+
         public void Initialize(ExtensionConfigContext context)
         {
+            connectionString = Environment.GetEnvironmentVariable("IoTConnectionString");
+            serviceClient = ServiceClient.CreateFromConnectionString(connectionString);
+
             // This allows a user to bind to IAsyncCollector<string>, and the sdk
             // will convert that to IAsyncCollector<IoTCloudToDeviceItem>
             context.AddConverter<string, IoTDirectMethodItem>(ConvertToItem);
@@ -46,7 +53,7 @@ namespace IoTHubExtension.Config
 
         private IAsyncCollector<IoTDirectMethodItem> BuildCollector(IoTDirectMethodAttribute attribute)
         {
-            return new IoTDirectMethodAsyncCollector(attribute);
+            return new IoTDirectMethodAsyncCollector(serviceClient, attribute);
         }
 
     }

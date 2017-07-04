@@ -4,6 +4,8 @@ using IoTHubExtension;
 using System.IO;
 using Newtonsoft.Json;
 using System;
+using Newtonsoft.Json.Linq;
+using Microsoft.Azure.Devices.Shared;
 
 namespace SampleFunctions
 {
@@ -15,7 +17,7 @@ namespace SampleFunctions
         {
             var item = new
             {
-                DeviceId = "myFirstDevice",
+                DeviceId = "receiverBob",
                 MessageId = "1",
                 Message = "Hello"
             };
@@ -23,7 +25,7 @@ namespace SampleFunctions
 
             item = new
             {
-                DeviceId = "myFirstDevice",
+                DeviceId = "receiverBob",
                 MessageId = "2",
                 Message = "From"
             };
@@ -31,7 +33,7 @@ namespace SampleFunctions
 
             item = new
             {
-                DeviceId = "myFirstDevice",
+                DeviceId = "receiverBob",
                 MessageId = "3",
                 Message = "Cloud"
             };
@@ -131,7 +133,22 @@ namespace SampleFunctions
             output.Add(JsonConvert.SerializeObject(item3));
         }
 
+        // Write some messages
+        [NoAutomaticTrigger]
+        public void GetDeviceTwin(string deviceId,  // from trigger
+            [IoTGetDeviceTwin(DeviceId= "{deviceId}")]JObject result,
+            TraceWriter log)
+        {
+            log.Info(JsonConvert.SerializeObject(result));
+        }
 
+        [NoAutomaticTrigger]
+        public void GetDeviceTwinTwinObject(string deviceId,  // from trigger
+            [IoTGetDeviceTwin(DeviceId = "{deviceId}")]Twin result,
+            TraceWriter log)
+        {
+            log.Info(result.ToJson());
+        }
 
 #if false
         #region Using 2nd extensions

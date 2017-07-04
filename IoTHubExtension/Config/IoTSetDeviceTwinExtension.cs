@@ -1,4 +1,5 @@
-﻿using Microsoft.Azure.WebJobs;
+﻿using Microsoft.Azure.Devices;
+using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Host.Config;
 using Newtonsoft.Json;
 using System;
@@ -11,8 +12,14 @@ namespace IoTHubExtension.Config
 {
     public class IoTSetDeviceTwinExtension : IExtensionConfigProvider
     {
+        private static string connectionString;
+        static RegistryManager registryManager;
+
         public void Initialize(ExtensionConfigContext context)
         {
+            connectionString = Environment.GetEnvironmentVariable("IoTConnectionString");
+            registryManager = RegistryManager.CreateFromConnectionString(connectionString);
+
             // This allows a user to bind to IAsyncCollector<string>, and the sdk
             // will convert that to IAsyncCollector<IoTCloudToDeviceItem>
             context.AddConverter<string, IoTSetDeviceTwinItem>(ConvertToItem);
@@ -46,7 +53,7 @@ namespace IoTHubExtension.Config
 
         private IAsyncCollector<IoTSetDeviceTwinItem> BuildCollector(IoTSetDeviceTwinAttribute attribute)
         {
-            return new IoTSetDeviceTwinAsyncCollector(attribute);
+            return new IoTSetDeviceTwinAsyncCollector(registryManager, attribute);
         }
 
         // All {} and %% in the Attribute have been resolved by now. 
