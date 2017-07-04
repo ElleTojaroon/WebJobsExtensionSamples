@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Azure.Devices;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Host.Config;
@@ -29,8 +26,7 @@ namespace IoTHubExtension.Config
 
             // Create 2 binding rules for the Sample attribute.
             var rule = context.AddBindingRule<IoTCloudToDeviceAttribute>();
-
-            //rule.BindToInput<SampleItem>(BuildItemFromAttr);
+            
             rule.BindToCollector<IoTCloudToDeviceItem>(BuildCollector);
         }
         

@@ -4,9 +4,6 @@ using Microsoft.Azure.WebJobs.Host.Config;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IoTHubExtension.Config
 {
@@ -55,16 +52,6 @@ namespace IoTHubExtension.Config
         {
             return new IoTSetDeviceTwinAsyncCollector(registryManager, attribute);
         }
-
-        // All {} and %% in the Attribute have been resolved by now. 
-        //private IoTSetDeviceTwinItem BuildItemFromAttr(IoTSetDeviceTwinAttribute attribute)
-        //{
-        //    return new IoTSetDeviceTwinItem
-        //    {
-        //        DeviceId = attribute.DeviceId,
-        //        UpdateId = attribute.UpdateId,
-        //        Patch = attribute.Patch
-        //    };
-        //}
+       
     }
 }

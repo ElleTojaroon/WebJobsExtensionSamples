@@ -1,5 +1,4 @@
-﻿using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.Devices;
 using System.Threading;
@@ -14,7 +13,6 @@ namespace IoTHubExtension.Config
         public IoTDirectMethodAsyncCollector(ServiceClient serviceClient, IoTDirectMethodAttribute attribute)
         {
             // create client;
-            //serviceClient = ServiceClient.CreateFromConnectionString(attribute.ConnectionString);
             IoTDirectMethodAsyncCollector.serviceClient = serviceClient;
         }
 
@@ -32,7 +30,6 @@ namespace IoTHubExtension.Config
         private static async Task InvokeMethod(string deviceID, string methodName)
         {
             var methodInvocation = new CloudToDeviceMethod(methodName) { ResponseTimeout = TimeSpan.FromSeconds(30) };
-            //methodInvocation.SetPayloadJson("'Hello From Cloud'");
 
             var response = await serviceClient.InvokeDeviceMethodAsync(deviceID, methodInvocation);
 

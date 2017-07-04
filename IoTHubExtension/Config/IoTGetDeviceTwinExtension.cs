@@ -1,13 +1,10 @@
 ﻿using Microsoft.Azure.Devices;
 using Microsoft.Azure.Devices.Shared;
-using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Host.Config;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace IoTHubExtension.Config
@@ -70,7 +67,6 @@ namespace IoTHubExtension.Config
         
         private async Task GetDeviceTwinAsync(IoTGetDeviceTwinAttribute attribute)
         {
-            //registryManager = RegistryManager.CreateFromConnectionString(attribute.ConnectionString);
             deviceTwin = await registryManager.GetTwinAsync(attribute.DeviceId);
         }
     }

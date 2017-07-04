@@ -1,10 +1,8 @@
-﻿using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.Devices;
 using System.Threading;
 using System;
-using Newtonsoft.Json;
 
 namespace IoTHubExtension.Config
 {
@@ -15,7 +13,6 @@ namespace IoTHubExtension.Config
         public IoTSetDeviceTwinAsyncCollector(RegistryManager registryManager, IoTSetDeviceTwinAttribute attribute)
         {
             // create client;
-            //IoTSetDeviceTwinAsyncCollector.registryManager = RegistryManager.CreateFromConnectionString(attribute.ConnectionString);            
             IoTSetDeviceTwinAsyncCollector.registryManager = registryManager;
         }
 
