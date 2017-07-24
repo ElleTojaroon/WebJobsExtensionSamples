@@ -1,11 +1,14 @@
 {
-  "name": "ledblink",
+  "name": "receiverdave",
   "version": "1.0.0",
-  "description": "to test blinking LED on raspberry pi 3",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "azure-iot-device-mqtt": "^1.1.16"
+  }
 }

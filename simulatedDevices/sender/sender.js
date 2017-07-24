@@ -6,6 +6,12 @@ var connectionString = 'HostName=IotHubC2D.azure-devices.net;DeviceId=sender;Sha
 var client = clientFromConnectionString(connectionString);
 var count = 0;
 
+var isAllTelemetry = 1;
+var isAllDirectMethods = 0;
+var isAllSBQueue = 0;
+var isAllSBTopic = 0;
+var isAnyAll = isAllTelemetry || isAllDirectMethods || isAllSBQueue || isAllSBTopic;
+
 function printResultFor(op) {
     return function printResult(err, res) {
         if (err) console.log(op + ' error: ' + err.toString());
@@ -66,24 +72,38 @@ var connectCallback = function (err) {
         // Create a message and send it to the IoT Hub every second
         setInterval(function () {
             var isDirectMethod = false;
+            var isSBQueue = false;
+            var isSBTopic = false;
             var messageString;
             var fontColor;
             var receiverDeviceId;
 
-            if (count % 5 == 0) {
+            if (isAllDirectMethods || (!isAnyAll && count % 5 == 0)) {
                 isDirectMethod = true;
                 messageString = 'writeLine';
                 receiverDeviceId = 'receiverAlice';
                 fontColor = "\x1b[31m"; // red -urgent
-            } else {
+            } else if (isAllSBQueue || (!isAnyAll && count % 3 == 0)) {
+                isSBQueue = true;
+                messageString = 'writeLine';
+                receiverDeviceId = 'receiverAlice';
+                fontColor = "\x1b[32m"; // green
+            } else if (isAllSBTopic || (!isAnyAll && count % 7 == 0)) {
+                isSBTopic = true;
+                messageString = 'writeLine';
+                receiverDeviceId = 'receiverAlice';
+                fontColor = "\x1b[36m"; // cyan
+            } else { // isAllTelemetry
                 messageString = "telemetry data point";
-                receiverDeviceId = 'receiverBob';
+                receiverDeviceId = 'receiverBob'; // used to be receiverBob
                 fontColor = "\x1b[33m%s\x1b[0m:"; // yellow -telemetry
             }
 
             var data = JSON.stringify({ DeviceId: receiverDeviceId, MessageId: Date.now(), Message: messageString });
             var message = new Message(data);
             message.properties.add('isDirectMethod', isDirectMethod);
+            message.properties.add('isSBQueue', isSBQueue);
+            message.properties.add('isSBTopic', isSBTopic);
 
             console.log("Sending message: " + fontColor, message.getData(), "\x1b[0m");
             client.sendEvent(message, printResultFor('send'));

@@ -37,6 +37,9 @@ namespace Host
             //var method = typeof(Functions).GetMethod("WriteMessageFromC2D");
             //host.Call(method);
 
+            var method = typeof(Functions).GetMethod("WriteMessageFromC2DArg");
+            host.Call(method, new { deviceId = "receiverBob" });
+
             // Test some invocations. 
             //var method = typeof(Functions).GetMethod("DirectInvokeMethod");
             //host.Call(method);
@@ -47,8 +50,8 @@ namespace Host
 
 
             ////// Test some invocations. 
-            var method = typeof(Functions).GetMethod("GetDeviceTwinTwinObject");
-            host.Call(method, new { deviceId = "receiverCarol", messageId = "123" });
+            //var method = typeof(Functions).GetMethod("GetDeviceTwinTwinObject");
+            //host.Call(method, new { deviceId = "receiverCarol", messageId = "123" });
 
             // host.RunAndBlock();
         }

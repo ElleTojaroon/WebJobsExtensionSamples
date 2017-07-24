@@ -42,6 +42,20 @@ namespace SampleFunctions
 
         // Write some messages
         [NoAutomaticTrigger]
+        public void WriteMessageFromC2DArg(string deviceId,  // from trigger
+            [IoTCloudToDevice(DeviceId = "{deviceId}", connection = "IoTConnectionString")] ICollector<string> output)
+        {
+            var item = new
+            {
+                DeviceId = deviceId,
+                MessageId = "1",
+                Message = "telemetry data point"
+            };
+            output.Add(JsonConvert.SerializeObject(item));
+        }
+
+        // Write some messages
+        [NoAutomaticTrigger]
         public void DirectInvokeMethod([IoTDirectMethod] ICollector<string> output)
         {
             var item = new

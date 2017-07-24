@@ -23,8 +23,8 @@ namespace IoTHubExtension
         [AutoResolve]
         public string Message { get; set; }
 
-        [AppSetting(Default = "IoTConnectionString")]
-        public string ConnectionString { get; set; }
+        [AppSetting]
+        public string connection { get; set; }
     }
 
 }
