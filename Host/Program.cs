@@ -15,26 +15,43 @@ namespace Host
             var config = new JobHostConfiguration();
             config.DashboardConnectionString = null;
 
-            // apply config before creating the host. 
-            var sampleExtension = new SampleExtension.Config.SampleExtensions();
-            config.AddExtension(sampleExtension);
+            // apply config before creating the host.
+            var cloudToDeviceExtension = new IoTHubExtension.Config.IoTCloudToDeviceExtension();
+            config.AddExtension(cloudToDeviceExtension);
 
-            // A 2nd extension that adds a custom rule on top of the first extension. 
-            //var sample2Extension = new SampleExtension.Config.Sample2Extensions();
-            //config.AddExtension(sample2Extension);
+            var directMethodExtension = new IoTHubExtension.Config.IoTDirectMethodExtension();
+            config.AddExtension(directMethodExtension);
+
+            var setDeviceTwinExtension = new IoTHubExtension.Config.IoTSetDeviceTwinExtension();
+            config.AddExtension(setDeviceTwinExtension);
+
+            var getDeviceTwinExtension = new IoTHubExtension.Config.IoTGetDeviceTwinExtension();
+            config.AddExtension(getDeviceTwinExtension);
 
             // Debug diagnostics!
             config.CreateMetadataProvider().DebugDumpGraph(Console.Out);
 
             var host = new JobHost(config);
 
-            // Test some invocations. 
-            // We're not using listeners here, so we can invoke directly. 
-            var method = typeof(Functions).GetMethod("Writer");
-            host.Call(method);
+            //Test some invocations.
+            //var method = typeof(Functions).GetMethod("WriteMessageFromC2D");
+            //host.Call(method);
 
-            method = typeof(Functions).GetMethod("Reader");
-            host.Call(method, new { name = "tom" });
+            var method = typeof(Functions).GetMethod("WriteMessageFromC2DArg");
+            host.Call(method, new { deviceId = "receiverBob" });
+
+            //Test some invocations.
+            method = typeof(Functions).GetMethod("DirectInvokeMethod");
+            host.Call(method, new { deviceId = "receiverAlice" });
+
+            //// Test some invocations. 
+            method = typeof(Functions).GetMethod("SetDeviceTwin");
+            host.Call(method, new { deviceId = "receiverBob" });
+
+
+            //// Test some invocations. 
+            method = typeof(Functions).GetMethod("GetDeviceTwinTwinObject");
+            host.Call(method, new { deviceId = "receiverCarol", messageId = "123" });
 
             // host.RunAndBlock();
         }
