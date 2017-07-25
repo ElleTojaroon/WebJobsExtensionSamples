@@ -43,7 +43,7 @@ namespace SampleFunctions
         // Write some messages
         [NoAutomaticTrigger]
         public void WriteMessageFromC2DArg(string deviceId,  // from trigger
-            [IoTCloudToDevice(DeviceId = "{deviceId}", connection = "IoTConnectionString")] ICollector<string> output)
+            [IoTCloudToDevice(DeviceId = "{deviceId}", Connection = "IoTConnectionString")] ICollector<string> output)
         {
             var item = new
             {
@@ -56,11 +56,12 @@ namespace SampleFunctions
 
         // Write some messages
         [NoAutomaticTrigger]
-        public void DirectInvokeMethod([IoTDirectMethod] ICollector<string> output)
+        public void DirectInvokeMethod(string deviceId,  // from trigger
+            [IoTDirectMethod(DeviceId = "{deviceId}", Connection = "IoTConnectionString")] ICollector<string> output)
         {
             var item = new
             {
-                DeviceId = "myFirstDevice",
+                DeviceId = deviceId,
                 InvokeId = "1",
                 MethodName = "writeLine"
             };
@@ -68,7 +69,7 @@ namespace SampleFunctions
 
             item = new
             {
-                DeviceId = "myFirstDevice",
+                DeviceId = deviceId,
                 InvokeId = "2",
                 MethodName = "writeLine"
             };
@@ -76,7 +77,7 @@ namespace SampleFunctions
 
             item = new
             {
-                DeviceId = "myFirstDevice",
+                DeviceId = deviceId,
                 InvokeId = "3",
                 MethodName = "writeLine"
             };
@@ -85,12 +86,13 @@ namespace SampleFunctions
 
         // Write some messages
         [NoAutomaticTrigger]
-        public void SetDeviceTwin([IoTSetDeviceTwin] ICollector<string> output)
+        public void SetDeviceTwin(string deviceId,  // from trigger
+            [IoTSetDeviceTwin(DeviceId = "{deviceId}", Connection = "IoTConnectionString")] ICollector<string> output)
         {
 
             var item2 = new
             {
-                DeviceId = "receiverAlice",
+                DeviceId = deviceId,
                 UpdateId = "2",
                 Patch = new
                 {
@@ -110,7 +112,7 @@ namespace SampleFunctions
 
             var item = new
             {
-                DeviceId = "receiverAlice",
+                DeviceId = deviceId,
                 UpdateId = "1",
                 Patch = new
                 {
@@ -128,7 +130,7 @@ namespace SampleFunctions
 
             var item3 = new
             {
-                DeviceId = "receiverAlice",
+                DeviceId = deviceId,
                 UpdateId = "3",
                 Patch = new
                 {
@@ -150,7 +152,7 @@ namespace SampleFunctions
         // Write some messages
         [NoAutomaticTrigger]
         public void GetDeviceTwin(string deviceId,  // from trigger
-            [IoTGetDeviceTwin(DeviceId= "{deviceId}")]JObject result,
+            [IoTGetDeviceTwin(DeviceId= "{deviceId}", Connection = "IoTConnectionString")]JObject result,
             TraceWriter log)
         {
             log.Info(JsonConvert.SerializeObject(result));
@@ -158,7 +160,7 @@ namespace SampleFunctions
 
         [NoAutomaticTrigger]
         public void GetDeviceTwinTwinObject(string deviceId,  // from trigger
-            [IoTGetDeviceTwin(DeviceId = "{deviceId}")]Twin result,
+            [IoTGetDeviceTwin(DeviceId = "{deviceId}", Connection = "IoTConnectionString")]Twin result,
             TraceWriter log)
         {
             log.Info(result.ToJson());

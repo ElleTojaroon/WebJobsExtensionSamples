@@ -14,9 +14,6 @@ namespace IoTHubExtension.Config
 
         public void Initialize(ExtensionConfigContext context)
         {
-            connectionString = Environment.GetEnvironmentVariable("IoTConnectionString");
-            registryManager = RegistryManager.CreateFromConnectionString(connectionString);
-
             // This allows a user to bind to IAsyncCollector<string>, and the sdk
             // will convert that to IAsyncCollector<IoTCloudToDeviceItem>
             context.AddConverter<string, IoTSetDeviceTwinItem>(ConvertToItem);
@@ -50,6 +47,12 @@ namespace IoTHubExtension.Config
 
         private IAsyncCollector<IoTSetDeviceTwinItem> BuildCollector(IoTSetDeviceTwinAttribute attribute)
         {
+            if (registryManager == null)
+            {
+                connectionString = attribute.Connection;
+                registryManager = RegistryManager.CreateFromConnectionString(connectionString);
+            }
+
             return new IoTSetDeviceTwinAsyncCollector(registryManager, attribute);
         }
        

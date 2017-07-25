@@ -24,7 +24,7 @@ namespace IoTHubExtension
         public string Message { get; set; }
 
         [AppSetting]
-        public string connection { get; set; }
+        public string Connection { get; set; }
     }
 
 }

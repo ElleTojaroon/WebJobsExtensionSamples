@@ -17,9 +17,6 @@ namespace IoTHubExtension.Config
 
         public void Initialize(ExtensionConfigContext context)
         {
-            connectionString = Environment.GetEnvironmentVariable("IoTConnectionString");
-            registryManager = RegistryManager.CreateFromConnectionString(connectionString);
-
             // This is useful on input. 
             context.AddConverter<Twin, string>(ConvertToString);
             context.AddConverter<Twin, Newtonsoft.Json.Linq.JObject>(ConvertToJObject);
@@ -67,6 +64,12 @@ namespace IoTHubExtension.Config
         
         private async Task GetDeviceTwinAsync(IoTGetDeviceTwinAttribute attribute)
         {
+            if (registryManager == null)
+            {
+                connectionString = attribute.Connection;
+                registryManager = RegistryManager.CreateFromConnectionString(connectionString);
+            }
+
             deviceTwin = await registryManager.GetTwinAsync(attribute.DeviceId);
         }
     }

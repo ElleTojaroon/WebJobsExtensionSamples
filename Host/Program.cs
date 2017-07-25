@@ -40,18 +40,18 @@ namespace Host
             var method = typeof(Functions).GetMethod("WriteMessageFromC2DArg");
             host.Call(method, new { deviceId = "receiverBob" });
 
-            // Test some invocations. 
-            //var method = typeof(Functions).GetMethod("DirectInvokeMethod");
-            //host.Call(method);
+            //Test some invocations.
+            method = typeof(Functions).GetMethod("DirectInvokeMethod");
+            host.Call(method, new { deviceId = "receiverAlice" });
 
-            ////// Test some invocations. 
-            //var method = typeof(Functions).GetMethod("SetDeviceTwin");
-            //host.Call(method);
+            //// Test some invocations. 
+            method = typeof(Functions).GetMethod("SetDeviceTwin");
+            host.Call(method, new { deviceId = "receiverBob" });
 
 
-            ////// Test some invocations. 
-            //var method = typeof(Functions).GetMethod("GetDeviceTwinTwinObject");
-            //host.Call(method, new { deviceId = "receiverCarol", messageId = "123" });
+            //// Test some invocations. 
+            method = typeof(Functions).GetMethod("GetDeviceTwinTwinObject");
+            host.Call(method, new { deviceId = "receiverCarol", messageId = "123" });
 
             // host.RunAndBlock();
         }

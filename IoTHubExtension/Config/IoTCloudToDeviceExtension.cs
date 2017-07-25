@@ -49,7 +49,7 @@ namespace IoTHubExtension.Config
         {
             if (serviceClient == null)
             {
-                connectionString = attribute.connection;
+                connectionString = attribute.Connection;
                 serviceClient = ServiceClient.CreateFromConnectionString(connectionString);
             }
 

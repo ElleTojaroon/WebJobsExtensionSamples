@@ -14,9 +14,6 @@ namespace IoTHubExtension.Config
 
         public void Initialize(ExtensionConfigContext context)
         {
-            connectionString = Environment.GetEnvironmentVariable("IoTConnectionString");
-            serviceClient = ServiceClient.CreateFromConnectionString(connectionString);
-
             // This allows a user to bind to IAsyncCollector<string>, and the sdk
             // will convert that to IAsyncCollector<IoTCloudToDeviceItem>
             context.AddConverter<string, IoTDirectMethodItem>(ConvertToItem);
@@ -50,6 +47,12 @@ namespace IoTHubExtension.Config
 
         private IAsyncCollector<IoTDirectMethodItem> BuildCollector(IoTDirectMethodAttribute attribute)
         {
+            if (serviceClient == null)
+            {
+                connectionString = attribute.Connection;
+                serviceClient = ServiceClient.CreateFromConnectionString(connectionString);
+            }
+
             return new IoTDirectMethodAsyncCollector(serviceClient, attribute);
         }
 
