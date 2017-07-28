@@ -1,5 +1,5 @@
 'use strict';
-// var wpi = require('wiring-pi');
+var wpi = require('wiring-pi');
 
 var clientFromConnectionString = require('azure-iot-device-mqtt').clientFromConnectionString;
 var Message = require('azure-iot-device').Message;
@@ -7,10 +7,10 @@ var connectionString = 'HostName=IotHubC2D.azure-devices.net;DeviceId=receiverBo
 var client = clientFromConnectionString(connectionString);
 
 // GPIO pin of the led
-// var configPin = 7;
-// wpi.setup('wpi');
-// wpi.pinMode(configPin, wpi.OUTPUT);
-// var isLedOn = 0;
+var configPin = 7;
+wpi.setup('wpi');
+wpi.pinMode(configPin, wpi.OUTPUT);
+var isLedOn = 0;
 
 function printResultFor(op) {
     return function printResult(err, res) {
@@ -63,14 +63,14 @@ var completeConfigChange = function (twin) {
     }
 }
 
-// var blinkLED = function () {
-//     isLedOn = 1;
-// 	wpi.digitalWrite(configPin, isLedOn );
-//     setTimeout(function(){ 
-//         isLedOn = 0;
-//         wpi.digitalWrite(configPin, isLedOn );  
-//      }, 1000);
-// }
+var blinkLED = function () {
+    isLedOn = 1;
+	wpi.digitalWrite(configPin, isLedOn );
+    setTimeout(function(){ 
+        isLedOn = 0;
+        wpi.digitalWrite(configPin, isLedOn );  
+     }, 1000);
+}
 
 var connectCallback = function (err) {
     if (err) {
@@ -79,7 +79,7 @@ var connectCallback = function (err) {
         console.log('Client connected');
 
         client.on('message', function (msg) {
-            // blinkLED();
+            blinkLED();
             console.log('Id: ' + msg.messageId + ' Body: ' + msg.data);
             client.complete(msg, printResultFor('completed'));
         });
