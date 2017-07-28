@@ -1,5 +1,5 @@
 'use strict';
-var wpi = require('wiring-pi');
+var wpi = require('wiringpi-node');
 
 var clientFromConnectionString = require('azure-iot-device-mqtt').clientFromConnectionString;
 var Message = require('azure-iot-device').Message;
@@ -7,7 +7,7 @@ var connectionString = 'HostName=IotHubC2D.azure-devices.net;DeviceId=receiverBo
 var client = clientFromConnectionString(connectionString);
 
 // GPIO pin of the led
-var configPin = 7;
+var configPin = 18;
 wpi.setup('wpi');
 wpi.pinMode(configPin, wpi.OUTPUT);
 var isLedOn = 0;

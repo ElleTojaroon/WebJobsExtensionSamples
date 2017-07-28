@@ -12,6 +12,21 @@ var isAllSBQueue = 0;
 var isAllSBTopic = 0;
 var isAnyAll = isAllTelemetry || isAllDirectMethods || isAllSBQueue || isAllSBTopic;
 
+// GPIO pin of the led
+// var configPin = 10;
+// wpi.setup('wpi');
+// wpi.pinMode(configPin, wpi.OUTPUT);
+// var isLedOn = 0;
+
+// var blinkLED = function () {
+//     isLedOn = 1;
+// 	wpi.digitalWrite(configPin, isLedOn );
+//     setTimeout(function(){ 
+//         isLedOn = 0;
+//         wpi.digitalWrite(configPin, isLedOn );  
+//      }, 1000);
+// }
+
 function printResultFor(op) {
     return function printResult(err, res) {
         if (err) console.log(op + ' error: ' + err.toString());

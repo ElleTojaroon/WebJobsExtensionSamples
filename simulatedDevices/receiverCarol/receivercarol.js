@@ -6,6 +6,21 @@ var DeviceClient = require('azure-iot-device').Client;
 var connectionString = 'HostName=IotHubC2D.azure-devices.net;DeviceId=receiverCarol;SharedAccessKey=YyEl39DZz8I/30UNJh/uZD50nyW53OlPJpA/O74Zhs8=';
 var client = DeviceClient.fromConnectionString(connectionString, Mqtt);
 
+// GPIO pin of the led
+var configPin = 11;
+wpi.setup('wpi');
+wpi.pinMode(configPin, wpi.OUTPUT);
+var isLedOn = 0;
+
+var blinkLED = function () {
+    isLedOn = 1;
+	wpi.digitalWrite(configPin, isLedOn );
+    setTimeout(function(){ 
+        isLedOn = 0;
+        wpi.digitalWrite(configPin, isLedOn );  
+     }, 1000);
+}
+
 var initConfigChange = function (twin) {
     var currentTelemetryConfig = twin.properties.reported.telemetryConfig;
     currentTelemetryConfig.pendingConfig = twin.properties.desired.telemetryConfig;
@@ -59,6 +74,7 @@ client.open(function (err) {
             if (err) {
                 console.error('\x1b[36m could not get twin \x1b[0m');
             } else {
+                blinkLED();
                 console.log('\x1b[36m retrieved device twin \x1b[0m');
                 twin.properties.reported.telemetryConfig = {
                     configId: "0",

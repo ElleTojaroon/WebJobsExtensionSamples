@@ -6,7 +6,23 @@ var DeviceClient = require('azure-iot-device').Client;
 var connectionString = 'HostName=IotHubC2D.azure-devices.net;DeviceId=receiverAlice;SharedAccessKey=SjlDF2qkRNzrIfb71LsyFcpgzGe2cGlnuWJRTnqPMZc=';
 var client = DeviceClient.fromConnectionString(connectionString, Mqtt);
 
+// GPIO pin of the led
+var configPin = 7;
+wpi.setup('wpi');
+wpi.pinMode(configPin, wpi.OUTPUT);
+var isLedOn = 0;
+
+var blinkLED = function () {
+    isLedOn = 1;
+	wpi.digitalWrite(configPin, isLedOn );
+    setTimeout(function(){ 
+        isLedOn = 0;
+        wpi.digitalWrite(configPin, isLedOn );  
+     }, 1000);
+}
+
 function onWriteLine(request, response) {
+    blinkLED();
     response.send(200, 'Input was written to log.', function (err) {
         if (err) {
             console.error('An error occurred when sending a method response:\n' + err.toString());
