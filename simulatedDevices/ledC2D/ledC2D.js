@@ -5,11 +5,11 @@ var connectionString = 'HostName=ElleIoTHubFinalTest1.azure-devices.net;DeviceId
 var client = clientFromConnectionString(connectionString);
 
 // GPIO pin of the led
-// var wpi = require('wiringpi-node');
-// var configPin = 7;
-// wpi.setup('wpi');
-// wpi.pinMode(configPin, wpi.OUTPUT);
-// var isLedOn = 0;
+var wpi = require('wiringpi-node');
+var configPin = 7;
+wpi.setup('wpi');
+wpi.pinMode(configPin, wpi.OUTPUT);
+var isLedOn = 0;
 var stillMove = 0;
 var yellowColor = "\x1b[33m%s\x1b[0m:"; // yellow -telemetry to print only
 var redColor = "\x1b[31m"; // red -urgent
@@ -24,15 +24,15 @@ function printResultFor(op) {
 
 var onPeopleMove = function () {
     stillMove += 1;
-    // isLedOn = 1;
-	// wpi.digitalWrite(configPin, isLedOn );
+    isLedOn = 1;
+	wpi.digitalWrite(configPin, isLedOn );
     console.log(yellowColor, "LED's on", resetFontColor);
 
     setTimeout(function(){
         if (!stillMove) {
             console.log(redColor, "LED's off", resetFontColor);
-            // isLedOn = 0;
-            // wpi.digitalWrite(configPin, isLedOn );
+            isLedOn = 0;
+            wpi.digitalWrite(configPin, isLedOn );
         }
      }, 3500);
 }
