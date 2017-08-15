@@ -2,15 +2,22 @@
 
 var clientFromConnectionString = require('azure-iot-device-mqtt').clientFromConnectionString;
 var Message = require('azure-iot-device').Message;
-var connectionString = 'HostName=IotHubC2D.azure-devices.net;DeviceId=sender;SharedAccessKey=8r2cSkjX3uCMdXXS7xVEyjylF6QipA9p814NuE37Koo=';
+// var connectionString = 'HostName=IotHubC2D.azure-devices.net;DeviceId=sender;SharedAccessKey=8r2cSkjX3uCMdXXS7xVEyjylF6QipA9p814NuE37Koo=';  // IoTHubC2D
+// var connectionString = 'HostName=Elle2ndIoTHub.azure-devices.net;DeviceId=sender;SharedAccessKey=thN78AdNhWdSaJt5lR3b/xcj/1cUp4OC3Z9pUtsnrEQ=' // Elle2ndIoTHub
+var connectionString = 'HostName=Elle3rdIOTHub.azure-devices.net;DeviceId=sender;SharedAccessKey=J5yIqFltPA1RgOIChFa6T82UkK32GYBNX4WetKFZkNE=';
 var client = clientFromConnectionString(connectionString);
 var count = 0;
 
-var isAllTelemetry = 1;
-var isAllDirectMethods = 0;
-var isAllSBQueue = 0;
-var isAllSBTopic = 0;
-var isAnyAll = isAllTelemetry || isAllDirectMethods || isAllSBQueue || isAllSBTopic;
+var forAllTelemetry = 0;
+var forAllDirectMethods = 1;
+var forAllSBQueue = 0;
+var forAllSBTopic = 0;
+var forAnyAll = forAllTelemetry || forAllDirectMethods || forAllSBQueue || forAllSBTopic;
+
+var forSomeTelemetry = 0;
+var forSomeDirectMethod = 0;
+var forSomeSBQueue = 0;
+var forSomeSBTopic = 0;
 
 // GPIO pin of the led
 // var configPin = 10;
@@ -93,22 +100,22 @@ var connectCallback = function (err) {
             var fontColor;
             var receiverDeviceId;
 
-            if (isAllDirectMethods || (!isAnyAll && count % 5 == 0)) {
+            if (forAllDirectMethods || (!forAnyAll && forSomeDirectMethod && count % 5 == 0)) {
                 isDirectMethod = true;
                 messageString = 'writeLine';
                 receiverDeviceId = 'receiverAlice';
                 fontColor = "\x1b[31m"; // red -urgent
-            } else if (isAllSBQueue || (!isAnyAll && count % 3 == 0)) {
+            } else if (forAllSBQueue || (!forAnyAll && forSomeSBQueue && count % 3 == 0)) {
                 isSBQueue = true;
                 messageString = 'writeLine';
                 receiverDeviceId = 'receiverAlice';
                 fontColor = "\x1b[32m"; // green
-            } else if (isAllSBTopic || (!isAnyAll && count % 7 == 0)) {
+            } else if (forAllSBTopic || (!forAnyAll && forSomeSBTopic && count % 7 == 0)) {
                 isSBTopic = true;
                 messageString = 'writeLine';
                 receiverDeviceId = 'receiverAlice';
                 fontColor = "\x1b[36m"; // cyan
-            } else { // isAllTelemetry
+            } else if (forAllTelemetry || (!forAnyAll && forSomeTelemetry)) { // isAllTelemetry
                 messageString = "telemetry data point";
                 receiverDeviceId = 'receiverBob'; // used to be receiverBob
                 fontColor = "\x1b[33m%s\x1b[0m:"; // yellow -telemetry
@@ -116,10 +123,18 @@ var connectCallback = function (err) {
 
             var data = JSON.stringify({ DeviceId: receiverDeviceId, MessageId: Date.now(), Message: messageString });
             var message = new Message(data);
-            message.properties.add('isDirectMethod', isDirectMethod);
+            message.properties.add('isDirectMethod', isDirectMethod); //isDirectMethod
             message.properties.add('isSBQueue', isSBQueue);
             message.properties.add('isSBTopic', isSBTopic);
 
+            // message.properties.add('elle3rdTestEHRoute1', true);
+            // message.properties.add('elle3rdTestEHRoute2', true);
+            // message.properties.add('elle3rdTestSBQueueRoute1', true);
+            // message.properties.add('elle3rdTestSBQueueRoute2', true);
+            // message.properties.add('elle3rdTestSBTopicRoute1', true);
+            // message.properties.add('elle3rdTestSBTopicRoute2', true);
+
+            console.log('isDirectMethod', isDirectMethod);
             console.log("Sending message: " + fontColor, message.getData(), "\x1b[0m");
             client.sendEvent(message, printResultFor('send'));
             count += 1;

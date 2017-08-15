@@ -4,30 +4,35 @@ var Mqtt = require('azure-iot-device-mqtt').Mqtt;
 var DeviceClient = require('azure-iot-device').Client;
 
 var connectionString = 'HostName=IotHubC2D.azure-devices.net;DeviceId=receiverAlice;SharedAccessKey=SjlDF2qkRNzrIfb71LsyFcpgzGe2cGlnuWJRTnqPMZc=';
+// var connectionString = 'HostName=Elle2ndIoTHub.azure-devices.net;DeviceId=receiverAlice;SharedAccessKey=r7J4idmmb6nluH6fz1YnzIX/GPsomIiGy/ROCtIoGeA=';
+// var connectionString = 'HostName=Elle3rdIOTHub.azure-devices.net;DeviceId=receiverAlice;SharedAccessKey=hlBRuVrbRtR+AaGkgIhKj0aFWwmFe3bMr+vA4W8awDA=';
 var client = DeviceClient.fromConnectionString(connectionString, Mqtt);
 
 // GPIO pin of the led
-var configPin = 7;
-wpi.setup('wpi');
-wpi.pinMode(configPin, wpi.OUTPUT);
-var isLedOn = 0;
+// var configPin = 7;
+// wpi.setup('wpi');
+// wpi.pinMode(configPin, wpi.OUTPUT);
+// var isLedOn = 0;
 
-var blinkLED = function () {
-    isLedOn = 1;
-	wpi.digitalWrite(configPin, isLedOn );
-    setTimeout(function(){ 
-        isLedOn = 0;
-        wpi.digitalWrite(configPin, isLedOn );  
-     }, 1000);
-}
+// var blinkLED = function () {
+//     isLedOn = 1;
+// 	wpi.digitalWrite(configPin, isLedOn );
+//     setTimeout(function(){ 
+//         isLedOn = 0;
+//         wpi.digitalWrite(configPin, isLedOn );  
+//      }, 1000);
+// }
 
 function onWriteLine(request, response) {
-    blinkLED();
+    // blinkLED();
     response.send(200, 'Input was written to log.', function (err) {
         if (err) {
             console.error('An error occurred when sending a method response:\n' + err.toString());
         } else {
-            console.log('Response to method \'' + request.methodName + '\' sent successfully.');
+            if (request.payload !== 'undefined') 
+                console.log('Response to method \'' + request.methodName + "\' with Payload: \'" + request.payload.arg1 + '\' sent successfully.');
+            else 
+                console.log('Response to method \'' + request.methodName + '\' sent successfully.');
         }
     });
 }
