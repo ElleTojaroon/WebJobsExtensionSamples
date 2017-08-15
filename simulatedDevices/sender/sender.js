@@ -4,7 +4,8 @@ var clientFromConnectionString = require('azure-iot-device-mqtt').clientFromConn
 var Message = require('azure-iot-device').Message;
 // var connectionString = 'HostName=IotHubC2D.azure-devices.net;DeviceId=sender;SharedAccessKey=8r2cSkjX3uCMdXXS7xVEyjylF6QipA9p814NuE37Koo=';  // IoTHubC2D
 // var connectionString = 'HostName=Elle2ndIoTHub.azure-devices.net;DeviceId=sender;SharedAccessKey=thN78AdNhWdSaJt5lR3b/xcj/1cUp4OC3Z9pUtsnrEQ=' // Elle2ndIoTHub
-var connectionString = 'HostName=Elle3rdIOTHub.azure-devices.net;DeviceId=sender;SharedAccessKey=J5yIqFltPA1RgOIChFa6T82UkK32GYBNX4WetKFZkNE=';
+// var connectionString = 'HostName=Elle3rdIOTHub.azure-devices.net;DeviceId=sender;SharedAccessKey=J5yIqFltPA1RgOIChFa6T82UkK32GYBNX4WetKFZkNE=';
+var connectionString = 'HostName=ElleIoTHubFinalTest1.azure-devices.net;DeviceId=sender;SharedAccessKey=wAcLzS9NC8IipECzeO5lF3p+e41ePmGkou4lq0vgoig=';
 var client = clientFromConnectionString(connectionString);
 var count = 0;
 

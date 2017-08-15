@@ -3,9 +3,10 @@
 
 var clientFromConnectionString = require('azure-iot-device-mqtt').clientFromConnectionString;
 var Message = require('azure-iot-device').Message;
-var connectionString = 'HostName=IotHubC2D.azure-devices.net;DeviceId=receiverBob;SharedAccessKey=syfaB/UJGdofR/TCvPYV2wUp75B3qo8fDphix4v/IfQ=';
+// var connectionString = 'HostName=IotHubC2D.azure-devices.net;DeviceId=receiverBob;SharedAccessKey=syfaB/UJGdofR/TCvPYV2wUp75B3qo8fDphix4v/IfQ=';
 // var connectionString = 'HostName=Elle2ndIoTHub.azure-devices.net;DeviceId=receiverBob;SharedAccessKey=pUtpNVnJeS/BJmbPz1zLhP2lwyoHrytaloBDePudbq8=';
 // var connectionString = 'HostName=IotHubC2D.azure-devices.net;DeviceId=takePicture;SharedAccessKey=cgGlLd0xzl7Nza7/563E/Lb4avczu7imLO/Dy2axR6s=';
+var connectionString = 'HostName=ElleIoTHubFinalTest1.azure-devices.net;DeviceId=receiverBob;SharedAccessKey=YquAgK0RYj5+zeXtGsFZgr7JdnnZ73weW/im5QhOPPk=';
 var client = clientFromConnectionString(connectionString);
 
 // GPIO pin of the led
