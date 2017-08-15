@@ -9,8 +9,8 @@ var connectionString = 'HostName=ElleIoTHubFinalTest1.azure-devices.net;DeviceId
 var client = clientFromConnectionString(connectionString);
 var count = 0;
 
-var forAllTelemetry = 0;
-var forAllDirectMethods = 1;
+var forAllTelemetry = 1;
+var forAllDirectMethods = 0;
 var forAllSBQueue = 0;
 var forAllSBTopic = 0;
 var forAnyAll = forAllTelemetry || forAllDirectMethods || forAllSBQueue || forAllSBTopic;
