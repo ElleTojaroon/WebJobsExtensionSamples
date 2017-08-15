@@ -2,6 +2,7 @@ import random
 import time
 import sys
 import iothub_client
+import json
 from iothub_client import IoTHubClient, IoTHubClientError, IoTHubTransportProvider, IoTHubClientResult
 from iothub_client import IoTHubMessage, IoTHubMessageDispositionResult, IoTHubError, DeviceMethodReturnValue
 
@@ -14,9 +15,10 @@ CONNECTION_STRING = 'HostName=ElleIoTHubFinalTest1.azure-devices.net;DeviceId=se
 PROTOCOL = IoTHubTransportProvider.MQTT
 MESSAGE_TIMEOUT = 10000
 SEND_CALLBACKS = 0
-MSG_TXT = "people motion detected!"
-FONT_COLOR = "\033[92m"
-RESET_COLOR = " \x1b[0m"
+MSG_TXT = json.dumps({
+    "DeviceId": "receiverBob",
+    "Message": "people motion detected!"
+})
 
 def send_confirmation_callback(message, result, user_context):
     global SEND_CALLBACKS
@@ -50,7 +52,7 @@ def iothub_client_telemetry_sample_run():
 
                 client.send_event_async(message, send_confirmation_callback, message_counter)
                 print ( "IoTHubClient.send_event_async accepted message for transmission to IoT Hub." )
-                print ( FONT_COLOR + MSG_TXT + RESET_COLOR )
+                print ( "\033[92m " + MSG_TXT + " \x1b[0m" )
 
                 status = client.get_send_status()
                 print ( "Send status: %s" % status )
