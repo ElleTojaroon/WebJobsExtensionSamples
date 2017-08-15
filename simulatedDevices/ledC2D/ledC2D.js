@@ -27,20 +27,20 @@ var onPeopleMove = function () {
     isLedOn = 1;
 	wpi.digitalWrite(configPin, isLedOn );
     console.log(yellowColor, "LED's on", resetFontColor);
-
+    watcher();
     setTimeout(function(){
         if (!stillMove) {
             console.log(redColor, "LED's off", resetFontColor);
             isLedOn = 0;
             wpi.digitalWrite(configPin, isLedOn );
         }
-     }, 3500);
+     }, 10500);
 }
 
 var watcher = function() {
     setTimeout(function(){
         stillMove = 0;
-     }, 3000);
+     }, 10000);
 }
 
 var connectCallback = function (err) {
@@ -51,7 +51,6 @@ var connectCallback = function (err) {
 
         client.on('message', function (msg) {
             onPeopleMove();
-            watcher();
             console.log(' Message: ' + msg.data);
             client.complete(msg, printResultFor('completed'));
         });
