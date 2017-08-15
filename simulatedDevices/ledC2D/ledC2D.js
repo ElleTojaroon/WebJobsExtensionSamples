@@ -1,16 +1,19 @@
 'use strict';
-var wpi = require('wiringpi-node');
-
 var clientFromConnectionString = require('azure-iot-device-mqtt').clientFromConnectionString;
 var Message = require('azure-iot-device').Message;
 var connectionString = 'HostName=ElleIoTHubFinalTest1.azure-devices.net;DeviceId=receiverBob;SharedAccessKey=YquAgK0RYj5+zeXtGsFZgr7JdnnZ73weW/im5QhOPPk=';
 var client = clientFromConnectionString(connectionString);
 
 // GPIO pin of the led
-var configPin = 7;
-wpi.setup('wpi');
-wpi.pinMode(configPin, wpi.OUTPUT);
-var isLedOn = 0;
+// var wpi = require('wiringpi-node');
+// var configPin = 7;
+// wpi.setup('wpi');
+// wpi.pinMode(configPin, wpi.OUTPUT);
+// var isLedOn = 0;
+var stillMove = 0;
+var yellowColor = "\x1b[33m%s\x1b[0m:"; // yellow -telemetry to print only
+var redColor = "\x1b[31m"; // red -urgent
+var resetFontColor = "\x1b[0m";
 
 function printResultFor(op) {
     return function printResult(err, res) {
@@ -20,11 +23,23 @@ function printResultFor(op) {
 }
 
 var onPeopleMove = function () {
-    isLedOn = 1;
-	wpi.digitalWrite(configPin, isLedOn );
-    setTimeout(function(){ 
-        isLedOn = 0;
-        wpi.digitalWrite(configPin, isLedOn );  
+    stillMove += 1;
+    // isLedOn = 1;
+	// wpi.digitalWrite(configPin, isLedOn );
+    console.log(yellowColor, "LED's on", resetFontColor);
+
+    setTimeout(function(){
+        if (!stillMove) {
+            console.log(redColor, "LED's off", resetFontColor);
+            // isLedOn = 0;
+            // wpi.digitalWrite(configPin, isLedOn );
+        }
+     }, 3500);
+}
+
+var watcher = function() {
+    setTimeout(function(){
+        stillMove = 0;
      }, 3000);
 }
 
@@ -36,6 +51,7 @@ var connectCallback = function (err) {
 
         client.on('message', function (msg) {
             onPeopleMove();
+            watcher();
             console.log(' Message: ' + msg.data);
             client.complete(msg, printResultFor('completed'));
         });
