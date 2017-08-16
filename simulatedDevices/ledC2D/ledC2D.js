@@ -41,9 +41,9 @@ var connectCallback = function (err) {
 
         client.on('message', function (msg) {
             console.log(' Message: ' + msg.data);
-            if (msg.data === "motion detected!")    turnLedOn();
-            else if (msg.data === "no motion")  turnLedOff();
-            else turnLedOn();
+            if (msg.data.toString() === "motion detected!")    turnLedOn();
+            else if (msg.data.toString() === "no motion")  turnLedOff();
+            else turnLedOff();
 
             client.complete(msg, printResultFor('completed'));
         });
