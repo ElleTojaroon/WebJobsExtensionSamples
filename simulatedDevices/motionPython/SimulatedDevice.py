@@ -18,7 +18,6 @@ SEND_CALLBACKS = 0
 msg_json = {
     "DeviceId": "receiverBob"
 }
-message_counter = 0
 
 def send_confirmation_callback(message, result, user_context):
     global SEND_CALLBACKS
@@ -61,15 +60,16 @@ def iothub_client_telemetry_sample_run():
     try:
         client = iothub_client_init()
         print ( "IoT Hub device sending periodic messages, press Ctrl-C to exit" )
+        message_counter = 0
 
         while True:
             pir.wait_for_motion()
             msg_json["Message"] = "motion detected!"
-            send_c2d_message_async(client)
+            send_c2d_message_async(client, message_counter)
             
             pir.wait_for_no_motion()
             msg_json["Message"] = "no motion"
-            send_c2d_message_async(client)
+            send_c2d_message_async(client, message_counter)
 
     except IoTHubError as iothub_error:
         print ( "Unexpected error %s from IoTHub" % iothub_error )
