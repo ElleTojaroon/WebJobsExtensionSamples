@@ -38,7 +38,7 @@ def iothub_client_init():
     client.set_option("logtrace", 0)
     return client
 
-def send_c2d_message_async():
+def send_c2d_message_async(client):
     msg_txt = json.dumps(msg_json)
     message = IoTHubMessage(msg_txt)
 
@@ -65,11 +65,11 @@ def iothub_client_telemetry_sample_run():
         while True:
             pir.wait_for_motion()
             msg_json["Message"] = "motion detected!"
-            send_c2d_message_async()
+            send_c2d_message_async(client)
             
             pir.wait_for_no_motion()
             msg_json["Message"] = "no motion"
-            send_c2d_message_async()
+            send_c2d_message_async(client)
 
     except IoTHubError as iothub_error:
         print ( "Unexpected error %s from IoTHub" % iothub_error )
