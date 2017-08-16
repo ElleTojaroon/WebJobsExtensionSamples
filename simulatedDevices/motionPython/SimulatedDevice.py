@@ -38,7 +38,7 @@ def iothub_client_init():
     client.set_option("logtrace", 0)
     return client
 
-def send_c2d_message_async(client):
+def send_c2d_message_async(client, message_counter):
     msg_txt = json.dumps(msg_json)
     message = IoTHubMessage(msg_txt)
 
