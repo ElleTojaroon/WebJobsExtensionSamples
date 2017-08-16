@@ -43,6 +43,7 @@ var connectCallback = function (err) {
             console.log(' Message: ' + msg.data);
             console.log(typeof msg.data);
             console.log(JSON.stringify(msg.data));
+            console.log("" + msg.data);
             if (msg.data.toString() === "motion detected!")    turnLedOn();
             else if (msg.data.toString() === "no motion")  turnLedOff();
             else turnLedOff();
