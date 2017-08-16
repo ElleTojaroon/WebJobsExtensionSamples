@@ -16,8 +16,7 @@ PROTOCOL = IoTHubTransportProvider.MQTT
 MESSAGE_TIMEOUT = 10000
 SEND_CALLBACKS = 0
 MSG_TXT = json.dumps({
-    "DeviceId": "receiverBob",
-    "Message": "people motion detected!"
+    "DeviceId": "receiverBob"
 })
 
 def send_confirmation_callback(message, result, user_context):
@@ -39,6 +38,22 @@ def iothub_client_init():
     client.set_option("logtrace", 0)
     return client
 
+def send_c2d_message_async():
+    message = IoTHubMessage(MSG_TXT)
+
+    client.send_event_async(message, send_confirmation_callback, message_counter)
+    print ( "IoTHubClient.send_event_async accepted message for transmission to IoT Hub." )
+    print ( "\033[92m " + MSG_TXT + " \x1b[0m" )
+
+    status = client.get_send_status()
+    print ( "Send status: %s" % status )
+    time.sleep(5)
+
+    status = client.get_send_status()
+    print ( "Send status: %s" % status )
+
+    message_counter += 1
+
 def iothub_client_telemetry_sample_run():
 
     try:
@@ -47,21 +62,13 @@ def iothub_client_telemetry_sample_run():
         message_counter = 0
 
         while True:
-            if pir.motion_detected:
-                message = IoTHubMessage(MSG_TXT)
-
-                client.send_event_async(message, send_confirmation_callback, message_counter)
-                print ( "IoTHubClient.send_event_async accepted message for transmission to IoT Hub." )
-                print ( "\033[92m " + MSG_TXT + " \x1b[0m" )
-
-                status = client.get_send_status()
-                print ( "Send status: %s" % status )
-                time.sleep(5)
-
-                status = client.get_send_status()
-                print ( "Send status: %s" % status )
-
-                message_counter += 1
+            pir.wait_for_motion()
+            MSG_TXT["Message"] = "motion detected!"
+            send_c2d_message_async()
+            
+            pir.wait_for_no_motion()
+            MSG_TXT["Message"] = "no motion"
+            send_c2d_message_async()
 
     except IoTHubError as iothub_error:
         print ( "Unexpected error %s from IoTHub" % iothub_error )

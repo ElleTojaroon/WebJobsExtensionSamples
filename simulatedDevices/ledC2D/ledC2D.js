@@ -10,7 +10,6 @@ var configPin = 7;
 wpi.setup('wpi');
 wpi.pinMode(configPin, wpi.OUTPUT);
 var isLedOn = 0;
-var stillMove = 0;
 var yellowColor = "\x1b[33m%s\x1b[0m:"; // yellow -telemetry to print only
 var redColor = "\x1b[31m"; // red -urgent
 var resetFontColor = "\x1b[0m";
@@ -22,25 +21,16 @@ function printResultFor(op) {
     };
 }
 
-var onPeopleMove = function () {
-    stillMove += 1;
+var turnLedOn = function () {
     isLedOn = 1;
 	wpi.digitalWrite(configPin, isLedOn );
     console.log(yellowColor, "LED's on", resetFontColor);
-    watcher();
-    setTimeout(function(){
-        if (!stillMove) {
-            console.log(redColor, "LED's off", resetFontColor);
-            isLedOn = 0;
-            wpi.digitalWrite(configPin, isLedOn );
-        }
-     }, 10500);
 }
 
-var watcher = function() {
-    setTimeout(function(){
-        stillMove = 0;
-     }, 10000);
+var turnLedOff = function () {
+    console.log(redColor, "LED's off", resetFontColor);
+    isLedOn = 0;
+    wpi.digitalWrite(configPin, isLedOn );
 }
 
 var connectCallback = function (err) {
@@ -50,8 +40,10 @@ var connectCallback = function (err) {
         console.log('Client connected');
 
         client.on('message', function (msg) {
-            onPeopleMove();
             console.log(' Message: ' + msg.data);
+            if (msg.data === "motion detected!")    turnLedOn();
+            else if (msg.data === "no motion")  turnLedOff();
+
             client.complete(msg, printResultFor('completed'));
         });
     }
