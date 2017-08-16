@@ -18,6 +18,7 @@ SEND_CALLBACKS = 0
 msg_json = {
     "DeviceId": "receiverBob"
 }
+message_counter = 0
 
 def send_confirmation_callback(message, result, user_context):
     global SEND_CALLBACKS
@@ -60,7 +61,6 @@ def iothub_client_telemetry_sample_run():
     try:
         client = iothub_client_init()
         print ( "IoT Hub device sending periodic messages, press Ctrl-C to exit" )
-        message_counter = 0
 
         while True:
             pir.wait_for_motion()
