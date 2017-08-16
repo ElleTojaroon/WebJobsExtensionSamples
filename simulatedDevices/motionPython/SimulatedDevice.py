@@ -15,9 +15,9 @@ CONNECTION_STRING = 'HostName=ElleIoTHubFinalTest1.azure-devices.net;DeviceId=se
 PROTOCOL = IoTHubTransportProvider.MQTT
 MESSAGE_TIMEOUT = 10000
 SEND_CALLBACKS = 0
-MSG_TXT = json.dumps({
+msg_json = {
     "DeviceId": "receiverBob"
-})
+}
 
 def send_confirmation_callback(message, result, user_context):
     global SEND_CALLBACKS
@@ -39,11 +39,12 @@ def iothub_client_init():
     return client
 
 def send_c2d_message_async():
-    message = IoTHubMessage(MSG_TXT)
+    msg_txt = json.dumps(msg_json)
+    message = IoTHubMessage(msg_txt)
 
     client.send_event_async(message, send_confirmation_callback, message_counter)
     print ( "IoTHubClient.send_event_async accepted message for transmission to IoT Hub." )
-    print ( "\033[92m " + MSG_TXT + " \x1b[0m" )
+    print ( "\033[92m " + msg_txt + " \x1b[0m" )
 
     status = client.get_send_status()
     print ( "Send status: %s" % status )
@@ -63,11 +64,11 @@ def iothub_client_telemetry_sample_run():
 
         while True:
             pir.wait_for_motion()
-            MSG_TXT["Message"] = "motion detected!"
+            msg_json["Message"] = "motion detected!"
             send_c2d_message_async()
             
             pir.wait_for_no_motion()
-            MSG_TXT["Message"] = "no motion"
+            msg_json["Message"] = "no motion"
             send_c2d_message_async()
 
     except IoTHubError as iothub_error:
